@@ -15,12 +15,18 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            //Karena username ingin unik maka gunakan unique()
+            $table->string('username')->unique();
             $table->string('password');
-            $table->rememberToken();
+            $table->string('firstname', 100);
+            $table->string('lastname', 100)->nullable();
             $table->timestamps();
+            /**
+             * Kalau user ini di delete nggak ke delete sepenuhnya dari 
+             * database tapi cuman softdelete aja jadi kita bakal bikin softdelete
+             */
+            $table->softDeletes();
         });
     }
 

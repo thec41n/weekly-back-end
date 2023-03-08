@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\PostDetailResource;
 
 class PostController extends Controller
 {
@@ -21,7 +22,15 @@ class PostController extends Controller
 
     public function show($id)
     {
+        $post = Post::with('writer:id,username')->findOrFail($id);
+        // Digunakan untuk return data hanya 1 saja
+        // Jangan lupa import class PostDetailResource
+        return new PostDetailResource($post);
+    }
+
+    public function showdata($id)
+    {
         $post = Post::findOrFail($id);
-        return response()->json(['database' => $post]);
+        return new PostDetailResource($post);
     }
 }

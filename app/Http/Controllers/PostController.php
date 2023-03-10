@@ -27,10 +27,4 @@ class PostController extends Controller
         // Jangan lupa import class PostDetailResource
         return new PostDetailResource($post);
     }
-
-    public function showdata($id)
-    {
-        $post = Post::findOrFail($id);
-        return new PostDetailResource($post);
-    }
 }

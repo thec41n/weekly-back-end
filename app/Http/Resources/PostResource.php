@@ -18,7 +18,8 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'blog_content' => $this->blog_content,
-            'created_at' => date_format($this->created_at, "d-m-y H:i:s")
+            'created_at' => date_format($this->created_at, "d-m-y H:i:s"),
+            'writer' => $this->whenLoaded('writer')
         ];
     }
 }

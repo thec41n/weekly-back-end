@@ -14,7 +14,7 @@ class PostController extends Controller
     {
         // Import class Post
         $posts = Post::all();
-        return PostResource::collection($posts);
+        return PostDetailResource::collection($posts->loadMissing('writer:id,username'));
     }
 
     public function show($id)

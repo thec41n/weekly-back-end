@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasFactory;
+    // Jangan lupa import SoftDeletes
+    use HasFactory, SoftDeletes;
     // Kita mendefinisikan kolom apa saja yang dapat diisi
     protected $fillable = [
         'title', 'blog_content', 'author'

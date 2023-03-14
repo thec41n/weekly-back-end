@@ -10,6 +10,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/myid', [AuthenticationController::class, 'myid']); 
     Route::post('/posts', [PostController::class, 'store']);
     Route::patch('/posts/{id}', [PostController::class, 'update'])->middleware('PostAuthor');
+    Route::delete('/posts/{id}', [PostController::class, 'destroy'])->middleware('PostAuthor');
 });
 
 Route::get('/posts', [PostController::class, 'index']);

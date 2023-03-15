@@ -14,13 +14,13 @@ class PostController extends Controller
     {
         // Import class Post
         $posts = Post::all();
-        return PostDetailResource::collection($posts->loadMissing('writer:id,username'));
+        return PostDetailResource::collection($posts->loadMissing(['writer:id,username','comments:id,post_id,user_id,comments_section']));
     }
 
     public function show($id)
     {
         $post = Post::with('writer:id,username')->findOrFail($id);
-        return new PostDetailResource($post);
+        return new PostDetailResource($post->loadMissing(['writer:id,username','comments:id,post_id,user_id,comments_section']));
     }
 
     public function store(Request $request)

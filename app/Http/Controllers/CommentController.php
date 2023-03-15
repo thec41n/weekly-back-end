@@ -24,7 +24,20 @@ class CommentController extends Controller
 
     public function update(Request $request, $id)
     {
-        # code...
+        $validated = $request->validate([
+            'comments_section' => 'required',
+        ]);
+
+        $comment = Comment::findOrFail($id);
+        $comment->update($request->only('comments_section'));
+        return new CommentResource($comment->loadMissing(['commentator:id,username']));
+    }
+
+    public function destroy($id)
+    {
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
+        return new CommentResource($comment->loadMissing(['commentator:id,username']));
     }
     
 }

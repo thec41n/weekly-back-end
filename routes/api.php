@@ -15,6 +15,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('/comment', [CommentController::class, 'store']);
     Route::patch('/comment/{id}', [CommentController::class, 'update'])->middleware('CommentAuthor');
+    Route::delete('/comment/{id}', [CommentController::class, 'destroy'])->middleware('CommentAuthor');
 });
 
 Route::get('/posts', [PostController::class, 'index']);

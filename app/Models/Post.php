@@ -14,7 +14,7 @@ class Post extends Model
     use HasFactory, SoftDeletes;
     // Kita mendefinisikan kolom apa saja yang dapat diisi
     protected $fillable = [
-        'title', 'blog_content', 'author'
+        'title', 'blog_content', 'author', 'image'
     ];
 
     /**

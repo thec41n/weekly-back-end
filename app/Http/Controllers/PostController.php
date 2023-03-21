@@ -32,14 +32,16 @@ class PostController extends Controller
             'blog_content' => 'required',
         ]);
         
+        $image = null;
         if ($request->file) {
             $fileName = $this->generateRandomString();
             $extension = $request->file->extension();
+            $image = $fileName.'.'.$extension;
 
-            Storage::putFileAs('image', $request->file, $fileName.'.'.$extension);
+            Storage::putFileAs('image', $request->file, $image);
         }
         
-        $request['image'] = $fileName.'.'.$extension;
+        $request['image'] = $image;
         // Jangan lupa Auth diimport
         $request['author'] = Auth::user()->id;
         $post = Post::create($request->all());
